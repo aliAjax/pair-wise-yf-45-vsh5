@@ -57,4 +57,27 @@ export interface Version {
 export interface OfflineDraft {
   scenes: Scene[];
   savedAt: string;
+  baselineScenes?: Scene[];
+  baselineVersionId?: string;
+}
+
+export type MergeSource = "draft" | "official";
+
+export interface MergeRecordItem {
+  sceneId: string;
+  code: string;
+  title: string;
+  source: MergeSource;
+  reason: string;
+}
+
+export interface MergeRecord {
+  id: string;
+  time: string;
+  draftSavedAt: string;
+  baselineMissing: boolean;
+  officialReverted: boolean;
+  operator: Role;
+  items: MergeRecordItem[];
+  summary: { total: number; draft: number; official: number; overrides: number };
 }
