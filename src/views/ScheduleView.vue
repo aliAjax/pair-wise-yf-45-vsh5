@@ -49,8 +49,11 @@ function drop(index: number) {
       <article class="metric"><span>版本快照</span><strong>{{ store.versions.length }}</strong></article>
     </div>
     <div v-if="store.draft" class="draft-banner">
-      <span>发现 {{ dayjs(store.draft.savedAt).format("MM-DD HH:mm") }} 的离线草稿，共 {{ store.draft.scenes.length }} 个场次。</span>
-      <div class="actions"><button class="secondary" @click="store.syncDraft">同步到正式通告</button></div>
+      <span>发现 {{ dayjs(store.draft.savedAt).format("MM-DD HH:mm") }} 的离线草稿（基线序号 {{ store.draft.baselineSeq }}），共 {{ store.draft.scenes.length }} 个场次，需对照合并。</span>
+      <div class="actions">
+        <RouterLink class="primary" to="/merge">进入合并对照</RouterLink>
+        <button class="secondary" @click="store.discardDraft">放弃</button>
+      </div>
     </div>
     <div class="grid-2">
       <section class="panel">
